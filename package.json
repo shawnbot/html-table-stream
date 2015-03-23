@@ -12,6 +12,7 @@
   },
   "license": "CC0",
   "dependencies": {
+    "cssauron": "^1.2.0",
     "extend": "^2.0.0",
     "htmlparser2": "^3.8.2",
     "htmlspecialchars": "^1.0.5",
