@@ -1,0 +1,24 @@
+{
+  "name": "html-table-stream",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && make"
+  },
+  "author": {
+    "name": "Shawn Allen",
+    "url": "https://github.com/shawnbot"
+  },
+  "license": "CC0",
+  "dependencies": {
+    "extend": "^2.0.0",
+    "htmlparser2": "^3.8.2",
+    "htmlspecialchars": "^1.0.5",
+    "through2": "^0.6.3",
+    "trim": "0.0.1"
+  },
+  "devDependencies": {
+    "ndjson": "^1.3.0"
+  }
+}
