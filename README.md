@@ -20,3 +20,5 @@ request('http://www.epa.gov/envirofw/html/codes/state.html')
   .pipe(ndjson.stringify())
   .pipe(process.stdout);
 ```
+
+[npm]: https://www.npmjs.com/
