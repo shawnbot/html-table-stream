@@ -6,7 +6,6 @@ process.stdin
   .pipe(table.format({
     table: {'class': 'foo>bar-baz'},
     indent: '  ',
-    columns: ['foo', 'bar', 'baz'],
-    format: '${}'
+    columns: ['foo', 'bar', 'baz']
   }))
   .pipe(process.stdout);
