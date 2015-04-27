@@ -1,4 +1,6 @@
-var yargs = require('yargs');
+var yargs = require('yargs')
+  .boolean('verbose')
+  .alias('verbose', 'v');
 var options = yargs.argv;
 var table = require('../');
 var ndjson = require('ndjson');
