@@ -1,6 +1,6 @@
 {
   "name": "html-table-stream",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Parse HTML tables as streaming JSON data",
   "main": "index.js",
   "scripts": {
