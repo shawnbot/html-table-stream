@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cd test && make"
+    "test": "mocha"
   },
   "author": {
     "name": "Shawn Allen",
@@ -25,6 +25,7 @@
     "yargs": "^3.8.0"
   },
   "devDependencies": {
+    "mocha": "^2.2.5",
     "ndjson": "^1.3.0"
   }
 }
