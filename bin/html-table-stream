@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+var yargs = require('yargs')
+  .usage('$0 [-w] [options] [<filename|url>] [<filename>]')
+  .describe('w', 'Write HTML table output from newline delimited JSON.')
+  .describe('preset', 'The parsing preset to use, e.g. "google-html"')
+  .describe('table', 'The table\'s CSS selector (default: "table")')
+  .describe('instance', 'Parse this instance of <table> elements in the input')
+  .describe('head-row', 'The header row CSS selector (default: "tr")')
+  .describe('head-cell', 'The header cell CSS selector (default: "th, td")')
+  .describe('body-row', 'The body row CSS selector (default: "tr")')
+  .describe('body-cell', 'The body cell CSS selector (default: "th, td")')
+  .describe('v', 'Print verbose debug messages to stderr')
+  .boolean('v')
+  .alias('preset', 'p')
+  .alias('table', 't')
+  .alias('head-row', 'hr')
+  .alias('head-cell', 'hc')
+  .alias('body-row', 'br')
+  .alias('body-cell', 'bc')
+  .alias('h', 'help');
+var options = yargs.argv;
+var args = options._;
+if (options.help) {
+  return yargs.showHelp();
+}
+
+delete options._;
+delete options.$0;
+'head-row head-cell body-row body-cell'.split(' ')
+  .forEach(function(src) {
+    if (!options[src]) return;
+    var dest = src
+      .replace(/head-/, 'header-')
+        .replace(/-([a-z])/, function(_, letter) {
+        return letter.toUpperCase();
+      });
+    options[dest] = options[src];
+    delete options[src];
+  });
+
+// if (options.v) console.warn('options:', options);
+
+var table = require('../');
+var fs = require('fs');
+var request = require('request');
+var ndjson = require('ndjson');
+
+require('epipebomb')();
+
+var input = args.length
+  ? open(args.shift(), process.stdin)
+  : process.stdin;
+
+var output = args.length
+  ? open(args.shift(), process.stdout)
+  : process.stdout;
+
+var parse = options.w
+  ? ndjson.parse()
+  : table.parse(options);
+
+var format = options.w
+  ? table.format(options)
+  : ndjson.stringify();
+
+input
+  .pipe(parse)
+  .pipe(format)
+  .pipe(output);
+
+function open(path, fallback) {
+  if (path.match(/^https?:\/\//)) {
+    return request(path);
+  } else if (path !== '-') {
+    return fs.createReadStream(path, 'utf8');
+  }
+  return fallback;
+}
