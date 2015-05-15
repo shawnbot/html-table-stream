@@ -10,6 +10,7 @@
     "name": "Shawn Allen",
     "url": "https://github.com/shawnbot"
   },
+  "repository": "shawnbot/html-table-stream",
   "license": "CC0",
   "dependencies": {
     "cssauron": "^1.2.0",
