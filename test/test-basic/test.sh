@@ -1,2 +1,2 @@
 #!/bin/sh
-../../bin/html-table-stream basic.html
+../../bin/html-table-stream input.html
